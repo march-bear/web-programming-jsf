@@ -1,6 +1,4 @@
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
     id 'war'
     id 'java'
 }
@@ -11,12 +9,17 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/jakarta.faces/jakarta.faces-api
+    implementation 'jakarta.faces:jakarta.faces-api:4.0.1'
     // https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api
-    compileOnly 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
+     implementation 'jakarta.platform:jakarta.jakartaee-api:10.0.0'
 
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
+
+    // https://mvnrepository.com/artifact/javax.el/el-api
+    implementation 'javax.el:el-api:2.2.1-b04'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -24,9 +27,4 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(19)
     }
-}
-
-application {
-    // Define the main class for the application.
-    mainClass = 'org.itmo.secs.App'
 }
