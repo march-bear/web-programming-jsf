@@ -1,0 +1,35 @@
+div.base {
+    padding-top: 85px;
+    padding-left: 100px;
+    padding-right: 50px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.base .main {
+    vertical-align: middle;
+    width: 40%;
+
+}
+
+.base .main .content {
+    height: auto;
+}
+
+.content {
+    text-align: justify;
+    padding: 10px;
+    background: white;
+    color: #003322;
+    font-size: 20px;
+}
+
+.content h1 {
+    font-size: 48px;
+}
+
+.content a {
+    color: #005533;
+}
