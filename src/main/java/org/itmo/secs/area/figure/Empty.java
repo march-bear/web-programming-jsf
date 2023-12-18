@@ -1,6 +1,7 @@
 package org.itmo.secs.area.figure;
 
-import com.org.itmo.lab2web.area.figure.primitive.Quarter;
+import org.itmo.secs.area.figure.primitive.Point;
+import org.itmo.secs.area.figure.primitive.Quarter;
 
 public class Empty extends Figure {
     @Override

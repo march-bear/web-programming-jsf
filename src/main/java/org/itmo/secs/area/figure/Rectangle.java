@@ -1,7 +1,8 @@
 package org.itmo.secs.area.figure;
 
-import com.org.itmo.lab2web.area.figure.primitive.Quarter;
 import jakarta.validation.constraints.Positive;
+import org.itmo.secs.area.figure.primitive.Quarter;
+import org.itmo.secs.area.figure.primitive.Point;
 
 public class Rectangle extends Figure {
     @Positive

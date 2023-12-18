@@ -1,8 +1,9 @@
 package org.itmo.secs.area;
 
-import com.org.itmo.lab2web.area.figure.Figure;
-import com.org.itmo.lab2web.area.figure.primitive.Point;
-import com.org.itmo.lab2web.area.figure.primitive.Quarter;
+
+import org.itmo.secs.area.figure.Figure;
+import org.itmo.secs.area.figure.primitive.Point;
+import org.itmo.secs.area.figure.primitive.Quarter;
 
 public class Area extends Figure {
     private final Figure firstQuarter;
