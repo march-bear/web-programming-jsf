@@ -61,7 +61,10 @@
                     раз <b>в <b id="clockUpdateIntervalText"></b> сек</b>.
                 </p><br />
                 <h:outputText id="presentDateTime" value="Текущее время: #{clock.formatDateTime}" /><br />
-                <p>Ссылка на основную страницу <a href="index.xhtml">здесь</a></p>
+                <p>Кнопка для перехода на основную страницу:</p>
+                <h:form>
+                    <h:commandButton id="to_index" action="finishWelcome" value="Тык!" />
+                </h:form>
             </div>
         </div>
 
