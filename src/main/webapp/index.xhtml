@@ -8,67 +8,96 @@
       xmlns:p="http://primefaces.org/ui"
 >
 <h:head>
-    <script>
-        const CLOCK_UPDATE_INTERVAL = 11000;
-    </script>
-    <title>
-    </title>
+    <link href="styles/style.css" rel="stylesheet" />
+    <link href="styles/block-layout.css" rel="stylesheet" />
+    <link href="styles/inputs.css" rel="stylesheet" />
+    <link
+            href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/PhpStorm_Icon.svg/512px-PhpStorm_Icon.svg.png"
+            rel="shortcut icon"
+            type="image/png"
+    />
+    <meta charset="UTF-8" />
+    <title>The best of Ordinary</title>
+    <script src="scripts/validation.js"></script>
+    <script src="scripts/drawing.js"></script>
+    <script src="scripts/script.js"></script>
 </h:head>
 <h:body>
-    <h:form id="hiddenForm" style="display:none">
-        <h:commandButton id="updatePresentDateTime">
-            <c:ajax render="presentDateTime" />
-        </h:commandButton>
-    </h:form>
-
-    <script>
-        setInterval(() => document.getElementById("hiddenForm:updatePresentDateTime").click(), CLOCK_UPDATE_INTERVAL);
-    </script>
-    <h:outputText id="presentDateTime" value="#{clock.formatDateTime}" />
-    <c:view>
-        <h:form id="checkingForm">
-            <table>
+    <div class="base">
+        <div class="main">
+            <div class="vertical">
+                <canvas id="cartesian_plane" height="400px" width="400px" oncontextmenu="return false;">
+                    canvas не поддерживается вашим браузером. Выведено изображение плоскости
+                </canvas>
+            </div>
+            <div class="vertical">
+                <h:form id="checkingForm">
+                    <table>
+                        <tr>
+                            <td>
+                                <h:selectOneMenu id="x" value="#{requestData.x}">
+                                    <c:selectItem itemValue="5" />
+                                    <c:selectItem itemValue="-3" />
+                                </h:selectOneMenu><b style="margin-left: 10px">— значение X</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:inputText id="y" value="#{requestData.y}" /><b style="margin-left: 10px">— значение Y</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:selectOneMenu id="r" value="#{requestData.r}">
+                                    <c:selectItem itemValue="5" />
+                                    <c:selectItem itemValue="1" />
+                                </h:selectOneMenu><b style="margin-left: 10px">— значение R</b>
+                            </td>
+                        </tr>
+                    </table>
+                    <h:commandButton action="#{requestData.checkHit()}" value="Проверить попадание">
+                        <c:ajax execute="checkingForm:x checkingForm:y checkingForm:r" render="checkingForm:res dataTable"/>
+                    </h:commandButton><br/>
+                    <h:commandButton action="#{requestData.clear()}" value="Очистить таблицу">
+                        <c:ajax render="checkingForm:res dataTable"/>
+                    </h:commandButton><br/>
+                    <h:commandButton action="welcomeBack" value="Вернуться к прекрасному" />
+                </h:form>
+            </div>
+        </div>
+        <div class="main">
+            <table class="results">
+                <thead>
                 <tr>
-                    <td>
-                        <h:outputLabel value="X #{requestData.x}" for="x" />
-                    </td>
-                    <td>
-                        <h:selectOneMenu id="x" value="#{requestData.x}">
-                            <c:selectItem itemValue="5" />
-                            <c:selectItem itemValue="-3" />
-                        </h:selectOneMenu>
-                    </td>
-                    <td>
-                        <h:message for="x" />
-                    </td>
+                    <td><b>X</b></td>
+                    <td><b>Y</b></td>
+                    <td><b>R</b></td>
+                    <td><b>Результат</b></td>
                 </tr>
-                <tr>
-                    <td><h:outputLabel value="Y #{requestData.y}" for="y"/></td>
-                    <td>
-                        <h:inputText id="y" value="#{requestData.y}" />
-                    </td>
-                    <td><h:message for="y" /></td>
-                </tr>
-                <tr>
-                    <td>
-                        <h:outputLabel value="R #{requestData.r}" for="r" />
-                    </td>
-                    <td>
-                        <h:selectOneMenu id="r" value="#{requestData.r}">
-                            <c:selectItem itemValue="5" />
-                            <c:selectItem itemValue="1" />
-                        </h:selectOneMenu>
-                    </td>
-                    <td>
-                        <h:message for="r" />
-                    </td>
-                </tr>
+                </thead>
             </table>
-            <h:commandButton action="#{requestData.checkHit()}" value="CHECK BL">
-                <c:ajax execute="checkingForm:x checkingForm:y checkingForm:r" render="checkingForm:res"/>
-            </h:commandButton>
-            <h:outputLabel id="res" value="#{requestData.hit}" />
-        </h:form>
-    </c:view>
+            <div class="results" style="height: 400px; overflow-y: auto;">
+                <h:dataTable id="dataTable" value = "#{requestData.points}" var = "point">
+                    <div class="results-table-body">
+                        <h:column>
+                            #{point.x}
+                        </h:column>
+
+                        <h:column>
+                            #{point.y}
+                        </h:column>
+
+                        <h:column>
+                            #{point.r}
+                        </h:column>
+
+                        <h:column>
+                            #{point.hit ? "Попадание" : "Мимо"}
+                        </h:column>
+                    </div>
+                </h:dataTable>
+            </div>
+        </div>
+    </div>
 </h:body>
 </html>
