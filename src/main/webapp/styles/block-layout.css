@@ -8,14 +8,24 @@ div.base {
     flex-wrap: nowrap;
 }
 
+.no_padding_top {
+    padding-top: 0;
+}
+
 .base .main {
     vertical-align: middle;
     width: 40%;
-
 }
 
 .base .main .content {
     height: auto;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 }
 
 .content {
